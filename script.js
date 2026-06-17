@@ -1,3 +1,28 @@
+let db;
+
+const request = indexedDB.open("ResumeDB", 1);
+
+request.onupgradeneeded = function(event) {
+
+    db = event.target.result;
+
+    if (!db.objectStoreNames.contains("resumes")) {
+
+        db.createObjectStore("resumes", {
+            keyPath: "id",
+            autoIncrement: true
+        });
+
+    }
+};
+
+request.onsuccess = function(event) {
+
+    db = event.target.result;
+
+    console.log("Database Ready");
+
+};
 // Set up PDF.js worker
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
 
@@ -49,8 +74,31 @@ fileInput.addEventListener('change', (e) => {
         processFile(e.target.files[0]);
     }
 });
+function saveResume(file) {
 
+    if (!db) {
+        console.log("Database not ready");
+        return;
+    }
+
+    const transaction =
+        db.transaction(["resumes"], "readwrite");
+
+    const store =
+        transaction.objectStore("resumes");
+
+    store.add({
+        name: file.name,
+        type: file.type,
+        uploadedAt: new Date(),
+        file: file
+    });
+
+    console.log("Resume Saved");
+
+}
 async function processFile(file) {
+    saveResume(file);
     const ext = file.name.split('.').pop().toLowerCase();
     
     document.getElementById('upload-screen').style.display = 'none';
@@ -371,3 +419,21 @@ setInterval(() => {
     }
 
 },100);
+function getAllResumes() {
+
+    const transaction =
+        db.transaction(["resumes"], "readonly");
+
+    const store =
+        transaction.objectStore("resumes");
+
+    const request =
+        store.getAll();
+
+    request.onsuccess = function() {
+
+        console.log(request.result);
+
+    };
+
+}

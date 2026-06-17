@@ -251,7 +251,13 @@ display:none;
 
 .dashboard-grid{
 display:grid;
-grid-template-columns:1fr 2fr;
+@media (max-width:768px){
+    .strength-wrapper{
+        display:grid;
+        grid-template-columns:1fr;
+        gap:15px;
+    }
+}
 gap:25px;
 margin-top:30px;
 }
@@ -452,9 +458,8 @@ border-radius:20px;
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Poppins',sans-serif;
+font-family: Inter, system-ui, sans-serif;
 }
-
 
 /* NAVBAR */
 
@@ -978,4 +983,60 @@ border-radius:20px;
 .upload-btn:hover{
     transform:translateY(-4px);
     box-shadow:0 10px 30px rgba(56,189,248,.4);
+}
+@media (max-width: 768px) {
+
+    body{
+        font-size:14px;
+    }
+
+    .hero h1{
+        font-size:2rem;
+        line-height:1.2;
+    }
+
+    h2{
+        font-size:1.5rem;
+    }
+
+    h3{
+        font-size:1.2rem;
+    }
+
+    h4{
+        font-size:1rem;
+    }
+
+    p, li{
+        font-size:0.9rem;
+        line-height:1.5;
+    }
+
+    .glass-panel{
+        padding:18px;
+    }
+
+    .strengths-list li,
+    .weaknesses-list li{
+        word-break: break-word;
+    }
+
+    #predicted-role{
+        font-size:1rem;
+        line-height:1.4;
+    }
+
+    .dashboard-grid{
+        grid-template-columns:1fr;
+        gap:15px;
+    }
+
+    .score-circle{
+        width:140px;
+        height:140px;
+    }
+
+    .score-circle h2{
+        font-size:2rem;
+    }
 }
