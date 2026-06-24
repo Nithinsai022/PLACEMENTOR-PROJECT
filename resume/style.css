@@ -52,6 +52,15 @@ body{
 
     transition:.3s;
 }
+.top-nav{
+    padding:15px;
+}
+
+.top-nav a{
+    color:white;
+    text-decoration:none;
+    font-weight:600;
+}
 /* NAVBAR */
 
 .navbar{

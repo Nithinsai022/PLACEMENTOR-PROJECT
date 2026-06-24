@@ -1,0 +1,21 @@
+[
+  {
+    "id": 1,
+    "company": "Google",
+    "role": "Frontend Developer Intern",
+    "location": "Hyderabad",
+    "salary": "8 LPA",
+    "skills": "HTML, CSS, JavaScript, React",
+    "applyLink": "https://careers.google.com"
+  },
+
+  {
+    "id": 2,
+    "company": "Amazon",
+    "role": "Software Engineer",
+    "location": "Bangalore",
+    "salary": "18 LPA",
+    "skills": "Java, DSA, SQL",
+    "applyLink": "https://amazon.jobs"
+  }
+]

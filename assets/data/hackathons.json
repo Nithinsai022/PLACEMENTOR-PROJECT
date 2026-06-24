@@ -1,0 +1,20 @@
+[
+  {
+    "organizer": "HackIndia",
+    "title": "National AI Hackathon",
+    "description": "Build AI-powered solutions",
+    "prize": "₹1,00,000",
+    "mode": "Online",
+    "deadline": "15 Aug 2026",
+    "link": "https://hackindia.com"
+  },
+  {
+    "organizer": "Google",
+    "title": "Google Cloud Challenge",
+    "description": "Build cloud applications",
+    "prize": "₹2,00,000",
+    "mode": "Online",
+    "deadline": "22 Aug 2026",
+    "link": "https://developers.google.com"
+  }
+]

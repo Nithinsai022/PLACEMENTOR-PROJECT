@@ -3,139 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Resume Analyzer</title>
-    
-    <!-- External Libraries via CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.21/mammoth.browser.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <title>PlaceMentor AI</title>
 
-    <!-- Link to our separate CSS file -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-    <!-- Loading Spinner -->
-    <div id="loading">
-    <div class="spinner"></div>
-
-    <h2 id="loading-text">Analyzing Resume...</h2>
-
-    <div class="progress-container">
-        <div id="progress-bar"></div>
-    </div>
-</div>
-
+    <!-- NAVBAR -->
     <nav class="navbar">
-        <a href="#" class="logo" onclick="location.reload()">Resume<span>Analyzer</span></a>
-        <div>
-            <button id="downloadBtn" class="btn btn-outline" style="margin-right: 15px; margin-top: 0; display: none;" onclick="downloadPDF()">Download Report</button>
-            <button id="themeToggle" class="theme-toggle">☀️</button>
+
+        <div class="logo">
+            PlaceMentor
         </div>
+
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="resume/index.html">Resume Analyzer</a></li>
+            <li><a href="#">Features</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+
+        <div class="nav-buttons">
+            <a href="auth/login.html" class="login-btn">
+                Login
+            </a>
+
+            <a href="auth/register.html" class="register-btn">
+                Register
+            </a>
+        </div>
+
     </nav>
 
-    <div class="container">
-        <!-- UPLOAD SCREEN -->
-        <div id="upload-screen">
-            <div class="hero">
-                <h1>AI Resume Analyzer</h1>
-                <p>Upload your resume directly in your browser. No servers, no installations, 100% private and instant.</p>
+    <!-- HERO SECTION -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h1>
+                Your Complete
+                <span>Placement Companion</span>
+            </h1>
+
+            <p>
+                Analyze resumes, discover internships,
+                find jobs, join hackathons and track
+                your placement journey from one platform.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="resume/index.html" class="primary-btn">
+                    Analyze Resume
+                </a>
+
+                <a href="auth/register.html" class="secondary-btn">
+                    Get Started
+                </a>
+
             </div>
 
-            <div class="upload-card" id="dropZone" onclick="document.getElementById('fileInput').click()">
-               <div class="resume-preview">
-
-    <div class="resume-card">
-        <div class="resume-line long"></div>
-        <div class="resume-line"></div>
-        <div class="resume-line short"></div>
-
-        <div class="resume-line long"></div>
-        <div class="resume-line"></div>
-
-        <div class="scan-bar"></div>
-    </div>
-  <div class="mini-score">
-    <span id="fakeScore">81%</span>
-    <p>ATS Match Score</p>
-</div>
-
-<button class="upload-btn">
-    Upload Resume
-</button>
-</div>
-                <h3>Drag & Drop your resume here</h3>
-                <p>Or click to browse (PDF, DOCX)</p>
-                <input type="file" id="fileInput" accept=".pdf,.docx">
-            </div>
-            
-            <div id="error-msg" style="color: var(--danger); margin-top: 20px;"></div>
         </div>
 
-        <!-- RESULTS SCREEN -->
-        <div id="results-screen">
-            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 1rem;">
-                <div>
-                    <h2>Analysis Report: <span id="res-filename" style="color: var(--accent);"></span></h2>
-                    <p>Phone: <span id="res-phone"></span></p>
-                </div>
-               <div style="text-align: right;">
-    <h3>Rating</h3>
-    <h2 id="res-rating" style="color: var(--success);"></h2>
+        <div class="hero-image">
 
-    <h4 style="margin-top:10px;">Predicted Role</h4>
-    <p id="predicted-role"></p>
-</div>
+            <div class="floating-card">
+                ATS Score: 92%
             </div>
 
-            <div class="dashboard-grid">
-                <!-- Left Col -->
-                <div>
-                    <div class="glass-panel" style="text-align: center;">
-                        <h3>Overall ATS Score</h3>
-                        <div class="score-circle">
-                            <h2><span id="res-score"></span>%</h2>
-                        </div>
-                    </div>
-
-                    <div class="glass-panel">
-                        <h3>Score Breakdown</h3>
-                        <div id="score-bars"></div>
-                    </div>
-                </div>
-
-                <!-- Right Col -->
-                <div>
-                    <div class="glass-panel">
-                        <h3>Skill Analysis</h3>
-                        <h4 style="margin-top: 15px;">Detected Technical Skills</h4>
-                        <div id="detected-skills" class="chip-container"></div>
-                        
-                        <h4 style="margin-top: 20px;">Common Missing Skills</h4>
-                        <div id="missing-skills" class="chip-container"></div>
-                    </div>
-
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                        <div class="glass-panel">
-                            <h3>Strengths</h3>
-                            <ul id="strengths-list" class="custom-list success"></ul>
-                        </div>
-                        <div class="glass-panel">
-                            <h3>Weaknesses</h3>
-                            <ul id="weaknesses-list" class="custom-list danger"></ul>
-                        </div>
-                    </div>
-
-                    <div class="glass-panel" style="border-left: 4px solid var(--accent);">
-                        <h3>Improvement Suggestions</h3>
-                        <ul id="suggestions-list" class="custom-list"></ul>
-                    </div>
-                </div>
+            <div class="floating-card">
+                500+ Internships
             </div>
+
+            <div class="floating-card">
+                150+ Companies
+            </div>
+
         </div>
-    </div>
 
-    <!-- Link to our separate JS file -->
-    <script src="script.js"></script>
+    </section>
+
+    <!-- FEATURES -->
+
+    <section class="features">
+
+        <h2>Everything You Need For Placements</h2>
+
+        <div class="feature-grid">
+
+            <div class="card">
+                <h3>Resume Analyzer</h3>
+                <p>
+                    AI-powered ATS scoring and resume improvement suggestions.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Internships</h3>
+                <p>
+                    Discover internships matching your skills and interests.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Jobs Portal</h3>
+                <p>
+                    Explore placement opportunities from top companies.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Hackathons</h3>
+                <p>
+                    Participate in coding competitions and innovation challenges.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Career Dashboard</h3>
+                <p>
+                    Track applications, ATS score and placement progress.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>AI Recommendations</h3>
+                <p>
+                    Personalized opportunities based on your profile.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- CTA -->
+
+    <section class="cta">
+
+        <h2>
+            Start Building Your Career Today
+        </h2>
+
+        <p>
+            Join students preparing smarter for placements.
+        </p>
+
+        <a href="auth/register.html" class="cta-btn">
+            Create Free Account
+        </a>
+
+    </section>
+<script>
+
+function logout(){
+
+    localStorage.removeItem(
+        "loggedInUser"
+    );
+
+    window.location.href =
+    "../auth/index.html";
+
+}
+
+</script>
 </body>
 </html>

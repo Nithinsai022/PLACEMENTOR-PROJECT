@@ -1,0 +1,18 @@
+[
+  {
+    "company":"Google",
+    "title":"Frontend Developer Intern",
+    "location":"Remote",
+    "stipend":"25000/month",
+    "skills":["HTML","CSS","JavaScript"],
+    "link":"https://careers.google.com"
+  },
+  {
+    "company":"Microsoft",
+    "title":"Software Engineer Intern",
+    "location":"Hyderabad",
+    "stipend":"30000/month",
+    "skills":["Java","SQL","DSA"],
+    "link":"https://careers.microsoft.com"
+  }
+]
