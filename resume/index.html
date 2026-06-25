@@ -34,7 +34,7 @@
     <nav class="navbar">
         <a href="#" class="logo" onclick="location.reload()">Resume<span>Analyzer</span></a>
         <div>
-            <button id="downloadBtn" class="btn btn-outline" style="margin-right: 15px; margin-top: 0; display: none;" onclick="downloadPDF()">Download Report</button>
+            
             <button id="themeToggle" class="theme-toggle">☀️</button>
         </div>
     </nav>
@@ -79,17 +79,33 @@
 
         <!-- RESULTS SCREEN -->
         <div id="results-screen">
-            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 1rem;">
+            <div class="report-header">
                 <div>
                     <h2>Analysis Report: <span id="res-filename" style="color: var(--accent);"></span></h2>
                     <p>Phone: <span id="res-phone"></span></p>
                 </div>
-               <div style="text-align: right;">
-    <h3>Rating</h3>
-    <h2 id="res-rating" style="color: var(--success);"></h2>
+               <div class="report-rating">
+   <div class="report-rating">
 
-    <h4 style="margin-top:10px;">Predicted Role</h4>
+    <h3>Rating</h3>
+
+    <h2 id="res-rating"
+        style="color: var(--success);"></h2>
+
+    <button
+        id="downloadBtn"
+        class="btn btn-outline"
+        style="display:none; margin:15px 0;"
+        onclick="downloadPDF()">
+        Download Report
+    </button>
+
+    <h4 style="margin-top:15px;">
+        Predicted Role
+    </h4>
+
     <p id="predicted-role"></p>
+
 </div>
             </div>
 
@@ -120,7 +136,7 @@
                         <div id="missing-skills" class="chip-container"></div>
                     </div>
 
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="strength-grid">
                         <div class="glass-panel">
                             <h3>Strengths</h3>
                             <ul id="strengths-list" class="custom-list success"></ul>
@@ -131,7 +147,7 @@
                         </div>
                     </div>
 
-                    <div class="glass-panel" style="border-left: 4px solid var(--accent);">
+                   <div class="glass-panel suggestion-panel">
                         <h3>Improvement Suggestions</h3>
                         <ul id="suggestions-list" class="custom-list"></ul>
                     </div>

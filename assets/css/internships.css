@@ -107,7 +107,7 @@ body {
 }
 
 .topbar h1 {
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 .search-box {
@@ -246,11 +246,10 @@ body {
 
     .menu-btn {
         display: block;
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 10000;
+        position: fixed; /* ✅ Fixed position to prevent scrolling away */
+        left: 15px;
+        top: 15px;
+        z-index: 10001; /* Above sidebar */
         background: #3b82f6;
         color: white;
         border: none;
@@ -271,14 +270,15 @@ body {
     .sidebar {
         position: fixed;
         top: 0;
-        left: -280px; /* Hidden initially */
+        left: -280px; 
         width: 260px;
         height: 100vh;
         background: rgba(15, 23, 42, 0.98);
         overflow-y: auto;
-        z-index: 9999;
+        z-index: 10000;
         display: block;
-        padding-top: 70px;
+        padding-top: 80px; /* Space for menu button */
+        padding-bottom: 40px; /* Prevent logout getting stuck at bottom */
     }
 
     .sidebar.show {
@@ -286,7 +286,7 @@ body {
     }
 
     .sidebar .logo {
-        display: none; /* Hide desktop logo inside the sliding menu */
+        display: none;
     }
 
     /* Adjust Main Content Area */
@@ -315,5 +315,50 @@ body {
     /* Adjust Grid to Single Column */
     .jobs-grid {
         grid-template-columns: 1fr;
+    }
+
+    /* =========================================
+       ✅ SHRINK CARDS FOR MOBILE
+       ========================================= */
+    .job-card {
+        padding: 18px; /* Slimmer card padding */
+    }
+
+    .company {
+        padding: 6px 12px;
+        font-size: 0.8rem; /* Smaller company badge */
+        margin-bottom: 12px;
+    }
+
+    .job-card h2 {
+        font-size: 1.3rem; /* Smaller job title */
+        margin-bottom: 6px;
+    }
+
+    .job-card p {
+        font-size: 0.9rem; /* Smaller subtitle */
+        margin-bottom: 14px;
+    }
+
+    .skills {
+        margin-bottom: 15px;
+    }
+
+    .skills span {
+        padding: 6px 10px;
+        font-size: 0.75rem; /* Smaller skill pills */
+    }
+
+    .job-footer h3 {
+        font-size: 1rem; /* Smaller salary text */
+    }
+
+    /* Shrink the Save/Apply buttons */
+    .actions button,
+    .apply-btn {
+        width: 75px;
+        height: 36px;
+        font-size: 13px;
+        padding: 0; /* Remove inner padding so height/width controls it */
     }
 }
