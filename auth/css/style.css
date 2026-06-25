@@ -293,7 +293,7 @@ body.login-page .deco-avatar {
 body.login-page .deco-text { font-size: 12px; }
 
 body.login-page .form-panel {
-    padding: 56px 52px;
+    padding: 9px 52px;
 
     display: flex;
     justify-content: center;
