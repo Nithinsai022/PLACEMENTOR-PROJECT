@@ -1,18 +1,27 @@
 function saveItem(item){
 
-let saved =
-JSON.parse(
-localStorage.getItem("savedItems")
-) || [];
+    let saved =
+    JSON.parse(localStorage.getItem("savedItems")) || [];
 
-saved.push(item);
+    const exists = saved.some(savedItem =>
+        savedItem.title === item.title &&
+        savedItem.role === item.role &&
+        savedItem.company === item.company
+    );
 
-localStorage.setItem(
-"savedItems",
-JSON.stringify(saved)
-);
+    if(exists){
+        alert("Already Saved");
+        return;
+    }
 
-alert("Internship Saved Successfully");
+    saved.push(item);
+
+    localStorage.setItem(
+        "savedItems",
+        JSON.stringify(saved)
+    );
+
+    alert(item.type + " Saved Successfully");
 
 }
 

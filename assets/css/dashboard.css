@@ -563,7 +563,7 @@ body{
 .menu-btn{
     display:block;
     position:fixed;
-    top:46px;
+    top:18px;
     left:15px;
     z-index:9999;
     background:#3b82f6;
@@ -573,6 +573,28 @@ body{
     padding:10px 14px;
     font-size:22px;
 }
+}
+/* Overlay */
+
+.overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100vh;
+    background:rgba(0,0,0,.45);
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:.3s;
+
+    z-index:9998;
+}
+
+.overlay.show{
+    opacity:1;
+    visibility:visible;
 }
 
 

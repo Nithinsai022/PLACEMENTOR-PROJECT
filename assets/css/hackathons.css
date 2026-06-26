@@ -240,13 +240,12 @@ body {
         width: 100%;
     }
 
-    .menu-btn {
+  .menu-btn {
         display: block;
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 10000;
+        position: fixed; /* ✅ Fixed position to prevent scrolling away */
+        left: 15px;
+        top: 15px;
+        z-index: 10001; /* Above sidebar */
         background: #3b82f6;
         color: white;
         border: none;
@@ -255,7 +254,6 @@ body {
         font-size: 22px;
         cursor: pointer;
     }
-
     .mobile-logo {
         font-size: 24px;
         font-weight: 700;
@@ -312,4 +310,27 @@ body {
     .hackathon-grid {
         grid-template-columns: 1fr;
     }
+}
+/* Overlay */
+
+.overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+
+    background: rgba(0,0,0,.45);
+
+    opacity: 0;
+    visibility: hidden;
+
+    z-index: 9998;
+
+    transition: .3s;
+}
+
+.overlay.show{
+    opacity: 1;
+    visibility: visible;
 }

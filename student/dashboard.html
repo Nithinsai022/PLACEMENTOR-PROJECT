@@ -51,6 +51,7 @@ Logout
     </nav>
 
 </div>
+<div class="overlay" id="overlay"></div>
 
 <div class="main">
 
@@ -311,11 +312,28 @@ function goToProfile(){
 <script>
 function toggleSidebar(){
 
+    const sidebar = document.querySelector(".sidebar");
+    const overlay = document.getElementById("overlay");
+    const logo = document.querySelector(".mobile-logo");
+
+    sidebar.classList.toggle("show");
+    overlay.classList.toggle("show");
+    logo.classList.toggle("hide-logo");
+}
+const overlay = document.getElementById("overlay");
+
+overlay.addEventListener("click", function(){
+
     document.querySelector(".sidebar")
-    .classList.toggle("show");
+    .classList.remove("show");
+
+    overlay.classList.remove("show");
 
     document.querySelector(".mobile-logo")
-    .classList.toggle("hide-logo");
-}
+    .classList.remove("hide-logo");
+
+});
+
 </script>
+
 </body>

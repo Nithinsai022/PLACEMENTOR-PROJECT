@@ -70,17 +70,31 @@ window.location.href =
 }
 function saveItem(item){
 
-let saved =
-JSON.parse(
-localStorage.getItem("savedItems")
-) || [];
+    let saved =
+    JSON.parse(
+    localStorage.getItem("savedItems")
+    ) || [];
 
-saved.push(item);
+    const alreadySaved = saved.some(savedItem =>
+        savedItem.role === item.role &&
+        savedItem.company === item.company
+    );
 
-localStorage.setItem(
-"savedItems",
-JSON.stringify(saved)
-);
+    if(alreadySaved){
 
-alert("Saved Successfully");
+        alert("Already Saved");
+
+        return;
+
+    }
+
+    saved.push(item);
+
+    localStorage.setItem(
+        "savedItems",
+        JSON.stringify(saved)
+    );
+
+    alert("Saved Successfully");
+
 }

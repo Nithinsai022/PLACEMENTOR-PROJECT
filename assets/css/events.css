@@ -227,13 +227,12 @@ body {
         width: 100%;
     }
 
-    .menu-btn {
+  .menu-btn {
         display: block;
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 10000;
+        position: fixed; /* ✅ Fixed position to prevent scrolling away */
+        left: 15px;
+        top: 15px;
+        z-index: 10001; /* Above sidebar */
         background: #3b82f6;
         color: white;
         border: none;
@@ -242,7 +241,6 @@ body {
         font-size: 22px;
         cursor: pointer;
     }
-
     .mobile-logo {
         font-size: 24px;
         font-weight: 700;
