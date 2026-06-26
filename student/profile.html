@@ -324,9 +324,41 @@ placeholder="Website URL">
 
 function openModal(){
 
-document.getElementById(
-"editModal"
-).style.display="flex";
+const profile = JSON.parse(
+localStorage.getItem("profile")
+) || {};
+
+document.getElementById("nameInput").value =
+profile.name || "";
+
+document.getElementById("phoneInput").value =
+profile.phone || "";
+
+document.getElementById("collegeInput").value =
+profile.college || "";
+
+document.getElementById("branchInput").value =
+profile.branch || "";
+
+document.getElementById("cgpaInput").value =
+profile.cgpa || "";
+
+document.getElementById("locationInput").value =
+profile.location || "";
+
+document.getElementById("linkedinInput").value =
+profile.linkedin || "";
+
+document.getElementById("githubInput").value =
+profile.github || "";
+
+document.getElementById("websiteInput").value =
+profile.website || "";
+
+document.getElementById("skillsInput").value =
+profile.skills || "";
+
+document.getElementById("editModal").style.display = "flex";
 
 }
 
@@ -367,9 +399,13 @@ github:
 document.getElementById("githubInput").value,
 
 website:
-document.getElementById("websiteInput").value
+document.getElementById("websiteInput").value,
+
+skills:
+document.getElementById("skillsInput").value
 
 };
+
 console.log("Profile Data:", profile);
 
 localStorage.setItem(
@@ -406,7 +442,7 @@ localStorage.getItem("loggedInUser")
 );
 
 document.getElementById("fullName").innerText =
-profile.name;
+profile.name || loggedUser?.name || "";
 
 document.getElementById("avatar").innerText =
 (loggedUser?.name || "S")
@@ -423,7 +459,7 @@ return;
 }
 
 document.getElementById("fullName").innerText =
-profile.name;
+loggedUser?.name || "";
 
 document.getElementById("phoneText").innerText =
 profile.phone || "Not Added";
@@ -440,8 +476,8 @@ profile.cgpa || "Not Added";
 document.getElementById("locationText").innerText =
 profile.location || "Not Added";
 
-document.getElementById("avatar").innerText =
-(profile.name || "S")
+document.getElementById("fullName").innerText =
+loggedUser?.name || ""
 .charAt(0)
 .toUpperCase();
 
@@ -457,7 +493,13 @@ profile.github || "Not Added";
 
 document.getElementById("websiteText").innerText =
 profile.website || "Not Added";
-
+document.getElementById("skillsContainer").innerHTML =
+profile.skills
+? profile.skills
+.split(",")
+.map(skill => `<span>${skill.trim()}</span>`)
+.join("")
+: "<span>No Skills Added</span>";
 }
 
 </script>
@@ -533,4 +575,3 @@ function logout(){
 }
 </script>
 </body>
-

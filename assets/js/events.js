@@ -1,99 +1,51 @@
-const container =
-document.getElementById("savedContainer");
+function saveItem(item){
 
-const saved =
-JSON.parse(localStorage.getItem("savedItems")) || [];
+    let saved =
+    JSON.parse(localStorage.getItem("savedItems")) || [];
 
-if(saved.length===0){
+    item.type = "Event";
 
-    container.innerHTML="<h2>No Saved Items</h2>";
+    const exists = saved.some(savedItem =>
+        savedItem.link === item.link
+    );
 
-}
+    if(exists){
+        alert("Already Saved");
+        return;
+    }
 
-saved.forEach(item=>{
+    saved.push(item);
 
-const name =
-item.role || item.title;
+    localStorage.setItem(
+        "savedItems",
+        JSON.stringify(saved)
+    );
 
-const company =
-item.company || item.organizer || item.type;
-
-const extra =
-item.salary ||
-item.stipend ||
-item.prize ||
-item.date;
-
-container.innerHTML += `
-
-<div class="saved-card">
-
-<div class="saved-type">
-${item.type}
-</div>
-
-<h2>${name}</h2>
-
-<p>${company}</p>
-
-<h3>${extra}</h3>
-
-<div class="actions">
-
-<a href="${item.link}" target="_blank">
-
-<button>
-Open
-</button>
-
-</a>
-
-<button onclick="removeItem('${name}')">
-
-Remove
-
-</button>
-
-</div>
-
-</div>
-
-`;
-
-});
-
-function removeItem(name){
-
-let saved =
-JSON.parse(localStorage.getItem("savedItems")) || [];
-
-saved = saved.filter(item=>
-
-(item.role || item.title)!==name
-
-);
-
-localStorage.setItem(
-
-"savedItems",
-
-JSON.stringify(saved)
-
-);
-
-location.reload();
+    alert("Event Saved Successfully");
 
 }
+
 fetch("../assets/data/events.json")
-.then(response => response.json())
+.then(response => {
+
+    if(!response.ok){
+        throw new Error("Unable to load events.json");
+    }
+
+    return response.json();
+
+})
 .then(events => {
 
     const container =
     document.getElementById("eventsContainer");
 
+    container.innerHTML = "";
+
     events.forEach(event => {
 
         container.innerHTML += `
+
         <div class="event-card">
 
             <div class="organizer">
@@ -108,23 +60,36 @@ fetch("../assets/data/events.json")
                 <span>${event.date}</span>
             </div>
 
-           <div class="actions">
+            <div class="actions">
 
-<button
-onclick='saveItem(${JSON.stringify(event)})'>
-Save
-</button>
+                <button
+                onclick='saveItem(${JSON.stringify(event)})'>
+                Save
+                </button>
 
-<a href="${event.link}" target="_blank">
-    <button>
-        Register
-    </button>
-</a>
+                <a href="${event.link}" target="_blank">
+                    <button>
+                        Register
+                    </button>
+                </a>
 
-</div>
+            </div>
 
         </div>
+
         `;
+
     });
+
+})
+.catch(error => {
+
+    console.error(error);
+
+    document.getElementById("eventsContainer").innerHTML = `
+        <h2 style="color:red;">
+            Failed to load events.
+        </h2>
+    `;
 
 });

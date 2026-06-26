@@ -65,3 +65,31 @@ Save
 });
 
 });
+function saveItem(item){
+
+    let saved =
+    JSON.parse(localStorage.getItem("savedItems")) || [];
+
+    // add type
+    item.type = "Event";
+
+    // Prevent duplicates
+    const exists = saved.some(savedItem =>
+        (savedItem.title || savedItem.role) === (item.title || item.role)
+    );
+
+    if(exists){
+        alert("Already Saved");
+        return;
+    }
+
+    saved.push(item);
+
+    localStorage.setItem(
+        "savedItems",
+        JSON.stringify(saved)
+    );
+
+    alert("Saved Successfully");
+
+}

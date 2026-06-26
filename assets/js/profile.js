@@ -46,6 +46,8 @@ document.getElementById(
 "skills"
 ).innerText =
 profile.skills || "Not Added";
+  
+
 
 function saveProfile(){
 
